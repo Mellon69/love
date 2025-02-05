@@ -11,8 +11,8 @@
             text-align: center;
             padding: 20px;
             position: relative;
-            min-height: 100vh;
-            overflow-x: hidden;
+            min-height: 100vh; /* Ensures full-page height */
+            overflow-x: hidden; /* Allows vertical scrolling but prevents horizontal overflow */
         }
         h1 {
             color: #d63384;
@@ -44,6 +44,16 @@
             margin-top: 5px;
             font-weight: bold;
         }
+        #hiddenMessage {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            color: #d63384;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            display: none;
+        }
         .button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -57,25 +67,13 @@
         .button:hover {
             background-color: #c2185b;
         }
-        #fortuneBox, #scratchCard, #puzzleGame, #wishBox, #replyBox, #hiddenMessage {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: white;
-            border-radius: 10px;
-            font-size: 18px;
-            display: none;
-        }
-        #scratchCanvas {
-            background: gray;
-            width: 200px;
-            height: 100px;
-        }
+        /* Falling Flowers Animation */
         .flower {
-            position: fixed;
+            position: fixed; /* Keeps flowers falling even when scrolling */
             top: -50px;
             font-size: 24px;
             animation: fall linear infinite;
-            pointer-events: none;
+            pointer-events: none; /* Prevents interfering with clicks */
         }
         @keyframes fall {
             to {
@@ -86,94 +84,90 @@
     </style>
 </head>
 <body>
+
+    <!-- Cute GIFs at the top -->
+    <img src="gif/Bunny Baking GIF.gif" width="100">
+    <img src="gif/decora fairy kei GIF.gif" width="100">
+    <img src="gif/sanrio GIF.gif" width="100">
+    
     <h1>Happy Birthday My Love! 🎉🎂</h1>
-    
-    <button class="button" onclick="showFortune()">Get Your Love Fortune 🔮</button>
-    <div id="fortuneBox"></div>
-    
-    <button class="button" onclick="startScratch()">Scratch to Reveal 🎨</button>
-    <canvas id="scratchCanvas"></canvas>
-    
-    <button class="button" onclick="startPuzzle()">Solve the Love Puzzle 🧩</button>
-    <div id="puzzleGame">[Puzzle Coming Soon]</div>
-    
-    <button class="button" onclick="makeAWish()">Make a Wish 🌠</button>
-    <div id="wishBox"></div>
-    
-    <button class="button" onclick="showReplyBox()">Write a Reply 💌</button>
-    <textarea id="replyBox" placeholder="Write something sweet..."></textarea>
-    
+    <p>Here’s a little surprise for you!</p>
+
     <button class="button" onclick="revealMessage()">Click to Reveal My Love</button>
-    <div id="hiddenMessage">Hey baby, I love you so much! ❤️</div>
-    
+    <div id="hiddenMessage">
+        Hey baby, I love youu so much, its yourr birthdayyy ahahaah. I'm so excited to surprise you.  
+        I wanted to tell you that you’re so strong and brave. You help me grow and be a better person, so I'm really grateful for your love.  
+        I still remember the night you first found me or rather say the night we found each other. You shape me into a better person,  
+        and I hope I do too. I know you have many battles that you wish to fight alone and I know you put yourself down so much,  
+        but I hope I make your life better, maybe just a bit, just for a while. I hope I make you forget about your problems.  
+        Anyways, I hope you have a wonderful day/night and a lovely life. And here's to many more years of joy and suffering together.  
+        I love you. ❤️  
+        <br>
+        <img src="gif/I Love You GIF by SpongeBob SquarePants.gif" width="200">
+    </div>
+
     <h2>Some Of Our Best Memories.</h2>
     <div id="gallery">
         <div class="memory">
-            <img src="images/first_date.jpg" class="image" alt="Memory 1">
+            <img src="images/WhatsApp Image 2025-02-04 at 09.56.30_88301cc4.jpg" class="image" alt="Memory 1">
             <p class="caption">✨Our First Date✨</p>
         </div>
         <div class="memory">
-            <img src="images/concert.jpg" class="image" alt="Memory 2">
-            <p class="caption">💖Our First Concert💖</p>
+            <img src="images/first concert.jpg" class="image" alt="Memory 2">
+            <p class="caption">💖Our First Night/Concert💖</p>
+        </div>
+        <div class="memory">
+            <img src="images/first ride.jpg" class="image" alt="Memory 3">
+            <p class="caption">🌙Our First Adventurous Ride (The ride that made me sick)🌙</p>
+        </div>
+        <div class="memory">
+            <img src="images/dinnerr.jpg" class="image" alt="Memory 4">
+            <p class="caption">🌹Our First Dinner Date.🌹</p>
         </div>
     </div>
-    
+
     <button class="button" onclick="playSong()">Play Our Song 🎶</button>
     <audio id="birthdaySong" src="song/Sweet - Cigarettes After Sex.mp3"></audio>
-    
-    <script>
-        let flowerInterval;
 
-        function showFortune() {
-            const fortunes = ["Your love is forever cherished!", "A lifetime of happiness awaits you!", "You are the reason for all my smiles!"];
-            document.getElementById("fortuneBox").innerText = fortunes[Math.floor(Math.random() * fortunes.length)];
-            document.getElementById("fortuneBox").style.display = "block";
-        }
-        
-        function startScratch() {
-            document.getElementById("scratchCanvas").style.display = "block";
-        }
-        
-        function startPuzzle() {
-            document.getElementById("puzzleGame").innerText = "Puzzle feature coming soon!";
-            document.getElementById("puzzleGame").style.display = "block";
-        }
-        
-        function makeAWish() {
-            const wishes = ["I wish for your happiness!", "May our love last forever!", "You are my everything!"];
-            document.getElementById("wishBox").innerText = wishes[Math.floor(Math.random() * wishes.length)];
-            document.getElementById("wishBox").style.display = "block";
-        }
-        
-        function showReplyBox() {
-            document.getElementById("replyBox").style.display = "block";
-        }
-        
+    <script>
+        let flowerInterval; // Store the interval ID to stop flowers later
+
         function revealMessage() {
             document.getElementById('hiddenMessage').style.display = 'block';
         }
-        
+
         function playSong() {
             let audio = document.getElementById('birthdaySong');
             audio.play();
+
+            // Start falling flowers
             startFlowers();
+
+            // Stop flowers when the song ends
             audio.onended = function() {
-                clearInterval(flowerInterval);
+                clearInterval(flowerInterval); // Stop creating flowers
             };
         }
-        
+
         function startFlowers() {
             const flowerEmojis = ["🌸", "🌺", "🌷", "💮", "🌹"];
+            
             flowerInterval = setInterval(() => {
                 let flower = document.createElement("div");
                 flower.innerText = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
                 flower.classList.add("flower");
                 flower.style.left = Math.random() * window.innerWidth + "px";
-                flower.style.animationDuration = (Math.random() * 5 + 3) + "s";
+                flower.style.animationDuration = (Math.random() * 5 + 3) + "s"; // Random fall speed
+                flower.style.fontSize = (Math.random() * 10 + 20) + "px"; // Random size
                 document.body.appendChild(flower);
-                setTimeout(() => { flower.remove(); }, 6000);
-            }, 300);
+
+                // Remove flowers after animation
+                setTimeout(() => {
+                    flower.remove();
+                }, 6000);
+            }, 300); // New flower every 300ms
         }
     </script>
+
 </body>
 </html>

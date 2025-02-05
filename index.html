@@ -11,7 +11,8 @@
             text-align: center;
             padding: 20px;
             position: relative;
-            overflow: hidden;
+            min-height: 100vh; /* Ensures full-page height */
+            overflow-x: hidden; /* Allows vertical scrolling but prevents horizontal overflow */
         }
         h1 {
             color: #d63384;
@@ -68,10 +69,11 @@
         }
         /* Falling Flowers Animation */
         .flower {
-            position: absolute;
+            position: fixed; /* Keeps flowers falling even when scrolling */
             top: -50px;
             font-size: 24px;
             animation: fall linear infinite;
+            pointer-events: none; /* Prevents interfering with clicks */
         }
         @keyframes fall {
             to {

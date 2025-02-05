@@ -57,6 +57,19 @@
         .button:hover {
             background-color: #c2185b;
         }
+        #fortuneBox, #scratchCard, #puzzleGame, #wishBox, #replyBox, #hiddenMessage {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 10px;
+            font-size: 18px;
+            display: none;
+        }
+        #scratchCanvas {
+            background: gray;
+            width: 200px;
+            height: 100px;
+        }
         .flower {
             position: fixed;
             top: -50px;
@@ -90,6 +103,21 @@
     <button class="button" onclick="showReplyBox()">Write a Reply 💌</button>
     <textarea id="replyBox" placeholder="Write something sweet..."></textarea>
     
+    <button class="button" onclick="revealMessage()">Click to Reveal My Love</button>
+    <div id="hiddenMessage">Hey baby, I love you so much! ❤️</div>
+    
+    <h2>Some Of Our Best Memories.</h2>
+    <div id="gallery">
+        <div class="memory">
+            <img src="images/first_date.jpg" class="image" alt="Memory 1">
+            <p class="caption">✨Our First Date✨</p>
+        </div>
+        <div class="memory">
+            <img src="images/concert.jpg" class="image" alt="Memory 2">
+            <p class="caption">💖Our First Concert💖</p>
+        </div>
+    </div>
+    
     <button class="button" onclick="playSong()">Play Our Song 🎶</button>
     <audio id="birthdaySong" src="song/Sweet - Cigarettes After Sex.mp3"></audio>
     
@@ -115,48 +143,35 @@
             const wishes = ["I wish for your happiness!", "May our love last forever!", "You are my everything!"];
             document.getElementById("wishBox").innerText = wishes[Math.floor(Math.random() * wishes.length)];
             document.getElementById("wishBox").style.display = "block";
-            createStars();
-        }
-        
-        function createStars() {
-            for (let i = 0; i < 10; i++) {
-                let star = document.createElement("div");
-                star.className = "star";
-                star.style.left = Math.random() * window.innerWidth + "px";
-                star.style.top = "0px";
-                document.body.appendChild(star);
-                setTimeout(() => star.remove(), 2000);
-            }
         }
         
         function showReplyBox() {
             document.getElementById("replyBox").style.display = "block";
         }
         
+        function revealMessage() {
+            document.getElementById('hiddenMessage').style.display = 'block';
+        }
+        
         function playSong() {
-            let audio = document.getElementById("birthdaySong");
+            let audio = document.getElementById('birthdaySong');
             audio.play();
             startFlowers();
             audio.onended = function() {
                 clearInterval(flowerInterval);
             };
         }
-
+        
         function startFlowers() {
             const flowerEmojis = ["🌸", "🌺", "🌷", "💮", "🌹"];
-            
             flowerInterval = setInterval(() => {
                 let flower = document.createElement("div");
                 flower.innerText = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
                 flower.classList.add("flower");
                 flower.style.left = Math.random() * window.innerWidth + "px";
                 flower.style.animationDuration = (Math.random() * 5 + 3) + "s";
-                flower.style.fontSize = (Math.random() * 10 + 20) + "px";
                 document.body.appendChild(flower);
-
-                setTimeout(() => {
-                    flower.remove();
-                }, 6000);
+                setTimeout(() => { flower.remove(); }, 6000);
             }, 300);
         }
     </script>

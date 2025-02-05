@@ -65,6 +65,21 @@
         .button:hover {
             background-color: #c2185b;
         }
+        /* Lyrics Animation */
+        #lyrics {
+            display: none;
+            font-size: 20px;
+            color: #d63384;
+            margin-top: 30px;
+        }
+        .lyric-line {
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -113,13 +128,26 @@
     <button class="button" onclick="playSong()">Play Our Song 🎶</button>
     <audio id="birthdaySong" src="song/Sweet - Cigarettes After Sex.mp3"></audio>
 
+    <!-- Animated Lyrics -->
+    <div id="lyrics">
+        <p class="lyric-line" style="animation-delay: 2s;">🎶 Meet me at the corner... 🎶</p>
+        <p class="lyric-line" style="animation-delay: 5s;">🎶 I'll be waiting for you... 🎶</p>
+        <p class="lyric-line" style="animation-delay: 8s;">🎶 With a bottle of wine... 🎶</p>
+        <p class="lyric-line" style="animation-delay: 11s;">🎶 And our favorite song... 🎶</p>
+        <p class="lyric-line" style="animation-delay: 14s;">🎶 Playing under the moonlight... 🎶</p>
+    </div>
+
     <script>
         function revealMessage() {
             document.getElementById('hiddenMessage').style.display = 'block';
         }
 
         function playSong() {
-            document.getElementById('birthdaySong').play();
+            let audio = document.getElementById('birthdaySong');
+            audio.play();
+
+            // Show lyrics after clicking play
+            document.getElementById('lyrics').style.display = 'block';
         }
     </script>
 
